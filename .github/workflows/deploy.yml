@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
-          source: "build/libs/*.jar"
+          source: "build/libs/app.jar"
           target: "/home/ubuntu/deployment-files"
           strip_components: 2
 
@@ -41,4 +41,4 @@ jobs:
           script: |
             cd /home/ubuntu/deployment-files
             fuser -k 8080/tcp || true
-            nohup java -jar *.jar &
+            nohup java -jar app.jar > app.log 2>&1 &
